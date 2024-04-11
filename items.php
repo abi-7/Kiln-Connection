@@ -8,6 +8,18 @@
 
 ****************/
 
+require('connect.php');
+
+// SQL is written as a String.
+//chronological order 5 most recent posts
+$query = "SELECT * FROM item ORDER BY item_name ASC LIMIT 10";
+
+// A PDO::Statement is prepared from the query.
+$statement = $db->prepare($query);
+
+// Execution on the DB server is delayed until we execute().
+$statement->execute(); 
+
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +35,35 @@
 <?php include('nav.php'); ?>
 
 <main>
+    <h1>Marketplace</h1>
+        <div class="search-container">
+            <input
+             type="text"
+             class="search-bar"
+             placeholder="Search for pottery items..."
+            />
+            <button type="submit" class="search-button">Search</button>
+        </div>
 
+                                <!--if no entries yet-->
+    <?php if($statement->rowCount() == 0) : ?>
+        <div>
+            <p>No artists yet!</p>
+        </div>
+    <?php else:?>
+        <ul>
+        <?php while($row = $statement->fetch()): ?>
+            <li>
+                <h3>
+                <?= $row['item_name'] ?>
+                </h3>
+                <small>
+                <?= $row['item_cost'] ?>
+                </small>
+            </li>
+            <?php endwhile; ?>
+        </ul>
+        <?php endif; ?>
 </main>
 
 <?php include('footer.php'); ?>
