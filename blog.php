@@ -36,13 +36,15 @@ $statement->execute();
 <?php include('nav.php'); ?>
 
 <main>
+    <button type="submit" class="search-button"><a href="post.php">Post</a></button>
+
     <h2>Recently posted blog entries</h2>
 
     <!--if no entries yet-->
 <?php if($statement->rowCount() == 0) : ?>
     <div>
         <p>No blog entries yet!</p>
-</div>
+    </div>
 <?php exit; endif; ?>
 
 <?php while($row = $statement->fetch()): ?>
@@ -64,8 +66,9 @@ $statement->execute();
         </div>
         <?php else : ?>
             <?=$row['content']?>
-        <?php endif; ?>
-    <?php endwhile; ?>
+        <?php exit; endif; ?>
+<?php endwhile; ?>
+
 </main>
 
 <?php include('footer.php'); ?>
