@@ -81,6 +81,19 @@ nav a:hover {
     line-height: 1.6;
 }
 
+.column img {
+    width: 100%;
+    max-width: 480px;
+    height: auto; 
+}
+
+#block-colour{
+    width: 100%;
+    background-color: rgb(235, 211, 187);
+    margin-left: 0%;
+    margin-right: 0%;
+}
+
 figcaption{
     font-size: 10px;
 }
@@ -111,8 +124,32 @@ form {
     padding: 0;
 }
 
-.form-group-title, .form-group-title{
+.form-group-title{
     margin-bottom: 20px;
+}
+
+.form-group-title, 
+.form-group-content 
+label{
+    display: inline-block;
+    text-align: left;
+}
+
+.form-group-title, 
+.form-group-content,
+input,
+textarea {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+}
+
+.form-group-content{
+    width: 100%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }
 
 /* hover effect for the submit button */
@@ -146,10 +183,19 @@ form button:hover {
     text-decoration: none;
 }
 
+.search-button a{
+    text-decoration: none;
+}
+
 .search-button:hover {
     background-color: #fbeee0;
 }
   
 h1{
     text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(35, 31, 32);
 }
