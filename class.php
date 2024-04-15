@@ -13,7 +13,7 @@ require('connect.php');
 
 // SQL is written as a String.
 //chronological order 5 most recent posts
-$query = "SELECT * FROM class ORDER BY class_name ASC LIMIT 10";
+$query = "SELECT * FROM class ORDER BY class_name ASC LIMIT 20";
 
 // A PDO::Statement is prepared from the query.
 $statement = $db->prepare($query);
@@ -54,14 +54,20 @@ $statement->execute();
             </p>
         </div>
     <?php else:?>
-        <ul>
+        <ul class="grid-container">
         <?php while($row = $statement->fetch()): ?>
-            <li>
+            <li class="grid-item">
                 <h3>
-                <?= $row['item_name'] ?>
+                <?= $row['class_name'] ?>
                 </h3>
                 <small>
-                <?= $row['item_cost'] ?>
+                <?= $row['class_level'] ?>
+                </small>
+                <small>Teacher: 
+                <?= $row['artist_teacher'] ?>
+                </small>
+                <small>$
+                <?= $row['class_cost'] ?>
                 </small>
             </li>
             <?php endwhile; ?>
