@@ -39,26 +39,30 @@
             </figcaption>
         </div>
     </div>
-    <div class="row" id="block-colour">
+    <div class="row">
         <div class="column">
-            <img src="images/pottery2.jpg" alt="ceramics-taylor-heery-unsplash" width="100%" style="max-width: 480px;">
-            <figcaption>Photo by <a href="https://unsplash.com/@taylorheeryphoto?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Taylor Heery</a> on <a href="https://unsplash.com/photos/brown-and-gray-metal-tool-ZSgWcW70cTs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+        <img src="images/pottery3.jpg" alt="ceramics-victor-lu-unsplash" width="100%" style="max-width: 480px;">
+            <figcaption>Photo by <a href="https://unsplash.com/@cazat69?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Victor Lu</a> on <a href="https://unsplash.com/photos/person-holding-green-leaf-on-gray-round-plate-S9NeuDnV0mg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
             </figcaption>
         </div>
         <div class="column">
-            <img src="images/pottery3.jpg" alt="ceramics-victor-lu-unsplash" width="100%" style="max-width: 480px;">
-            <figcaption>Photo by <a href="https://unsplash.com/@cazat69?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Victor Lu</a> on <a href="https://unsplash.com/photos/person-holding-green-leaf-on-gray-round-plate-S9NeuDnV0mg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-            </figcaption>
+        <h2>Classes</h2>
+            <p>Unleash your creativity and dive into the world of pottery with our exciting classes! Whether you're a beginner or a seasoned pro, our expert instructors will guide you through the fundamentals and advanced techniques of pottery making.</p>
+            <button type="submit" class="search-button"><a href="class.php">Register for a class</a></button>
         </div>
     </div>
     <div class="row">
         <div class="column">
-        <button type="submit" class="search-button"><a href="class.php">Register for a class</a></button>
+            <br>
+            <button type="submit" class="search-button"><a href="artists.php">Check out the pros!</a></button>
+            <h2> </h2>
+            <button type="submit" class="search-button"><a href="items.php">Dive into our marketplace!</a></button>
         </div>
         <div class="column">
-            <h2>Content Block 4</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non feugiat justo. Aliquam erat volutpat.</p>
-        </div>
+        <img src="images/pottery2.jpg" alt="ceramics-taylor-heery-unsplash" width="100%" style="max-width: 480px;">
+            <figcaption>Photo by <a href="https://unsplash.com/@taylorheeryphoto?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Taylor Heery</a> on <a href="https://unsplash.com/photos/brown-and-gray-metal-tool-ZSgWcW70cTs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+            </figcaption>
+    </div>
     </div>
 </div>
 </main>
