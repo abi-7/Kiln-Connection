@@ -12,7 +12,7 @@ require('connect.php');
 
 // SQL is written as a String.
 //chronological order 5 most recent posts
-$query = "SELECT * FROM artist ORDER BY first_name ASC LIMIT 10";
+$query = "SELECT * FROM artist ORDER BY first_name ASC LIMIT 20";
 
 // Prepare and execute the default query
 $statement = $db->prepare($query);
@@ -52,13 +52,13 @@ $statement->execute();
             <p>No artists yet!</p>
         </div>
     <?php else:?>
-        <ul>
+        <ul class="grid-container">
         <?php while($row = $statement->fetch()): ?>
-            <li>
+            <li class="grid-item">
                 <h3>
                 <?= $row['first_name'] . ' ' . $row['last_name'] ?>
                 </h3>
-                <small>
+                <small>Studio Address: 
                 <?= $row['home_studio'] ?>
                 </small>
             </li>
