@@ -3,7 +3,7 @@
 /*******w******** 
     
     Name: Abigail Ferreira
-    Date: 2024-02-19
+    Date: 2024-04-19
     Description: main page to explore artists
 
 ****************/
@@ -20,6 +20,33 @@ $statement = $db->prepare($query);
 // Execute the query
 $statement->execute(); 
 
+$searchErr = '';
+$artist_details='';
+if(isset($_POST['save']))
+{
+	if(!empty($_POST['search']))
+	{
+        $search = htmlspecialchars($_POST['search']);
+		$searchQuery = "
+            SELECT * FROM artist WHERE first_name LIKE :search OR last_name LIKE :search
+        ";
+        $stmt = $db->prepare($searchQuery);
+
+        $stmt->execute(array(':search' => "%$search%"));
+        // Fetch results
+        $artist_details = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+	else
+	{
+		$searchErr = "Please enter the information";
+	}
+   
+}
+
+// Check if the clear button is clicked
+if (isset($_POST['clear'])) {
+    $artist_details = '';
+}
 
 ?>
 
@@ -37,21 +64,48 @@ $statement->execute();
 
 <main>
     <h1>Local Artists</h1>
-        <form class="search-container" action="" method="GET">
+        <form action="#" method="post">
+            <div class="search-container">
             <input
              type="text"
              class="search-bar"
+             name="search"
              placeholder="Search by artist name ..."
             />
-            <button type="submit" class="search-button">Search</button>
+            <button type="submit" name="save" class="search-button">Search</button>
+            <button type="submit" name="clear" class="search-button">Reset</button>
+            </div>  
         </form>
 
-                        <!--if no entries yet-->
+    <!--search error-->
+    <?php if(!empty($searchErr)) : ?>
+        <div>
+             <p><?php echo $searchErr; ?></p>
+        </div>
+    <?php endif; ?>
+    
+    <!--if no entries yet-->
     <?php if($statement->rowCount() == 0) : ?>
         <div>
             <p>No artists yet!</p>
         </div>
     <?php else:?>
+    <!--display based off search-->
+    <?php if(!empty($artist_details)) : ?>
+    <h2>Search Results</h2>
+    <ul class="grid-container">
+        <?php foreach($artist_details as $artist) : ?>
+            <li class="grid-item">
+                <h3>
+                <?= $artist['first_name'] . ' ' . $artist['last_name'] ?>
+                </h3>
+                <small>Studio Address: 
+                <?= $artist['home_studio'] ?>
+                </small>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    <?php else: ?>
         <ul class="grid-container">
         <?php while($row = $statement->fetch()): ?>
             <li class="grid-item">
@@ -64,6 +118,7 @@ $statement->execute();
             </li>
             <?php endwhile; ?>
         </ul>
+        <?php endif; ?>
         <?php endif; ?>
 </main>
 
