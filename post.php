@@ -8,6 +8,28 @@
 
 ****************/
 
+require('connect.php');
+
+// update database
+// insert statement
+if($_POST && !empty($_POST['title']) && !empty($_POST['content'])) {
+
+    $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $content = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+    $query = "INSERT INTO blog (title, content) VALUES (:title, :content)";
+    $statement = $db->prepare($query);
+
+    $statement->bindValue(':title', $title); 
+    $statement->bindValue(':content', $content);
+
+    // execute INSERT command
+    $statement->execute();
+
+    //header - takes u to other screen
+    header("Location: blog.php");
+    
+}
 
 ?>
 
@@ -36,7 +58,7 @@
                 <textarea name="content" id="content" cols="30" rows="10" minlength="1" required></textarea>
             </div>
 
-            <button type="submit" class="button-primary">Submit Post</button>
+            <button type="submit" class="search-button">Submit Post</button>
         </form>
 </main>
 
