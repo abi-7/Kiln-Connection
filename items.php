@@ -26,6 +26,37 @@ $statement = $db->prepare($query);
 // Execution on the DB server is delayed until we execute().
 $statement->execute(); 
 
+$searchErr = '';
+$item_details='';
+if(isset($_POST['save']))
+{
+	if(!empty($_POST['search']))
+	{
+        $search = htmlspecialchars($_POST['search']);
+		$searchQuery = "
+            SELECT Item.*, PotteryType.type_name AS pottery_type
+            FROM Item
+            INNER JOIN PotteryType ON Item.type_id = PotteryType.type_id
+            WHERE item_name LIKE :search OR type_name LIKE :search
+        ";
+        $stmt = $db->prepare($searchQuery);
+
+        $stmt->execute(array(':search' => "%$search%"));
+        // Fetch results
+        $item_details = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+	else
+	{
+		$searchErr = "Please enter the information";
+	}
+   
+}
+
+// Check if the clear button is clicked
+if (isset($_POST['clear'])) {
+    $item_details = '';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -41,22 +72,53 @@ $statement->execute();
 <?php include('nav.php'); ?>
 
 <main>
+<form action="#" method="post">
     <h1>Marketplace</h1>
         <div class="search-container">
             <input
              type="text"
              class="search-bar"
+             name="search"
              placeholder="Search for pottery items..."
             />
-            <button type="submit" class="search-button">Search</button>
+            <button type="submit" name="save" class="search-button">Search</button>
+            <button type="submit" name="clear" class="search-button">Reset</button>
         </div>
+</form>
 
-                                <!--if no entries yet-->
+    <!--search error-->
+    <?php if(!empty($searchErr)) : ?>
+        <div>
+             <p><?php echo $searchErr; ?></p>
+        </div>
+    <?php endif; ?>
+
+     <!--if no entries yet-->
     <?php if($statement->rowCount() == 0) : ?>
         <div>
             <p>No items yet!</p>
         </div>
     <?php else:?>
+    <!--display based off search-->
+    <?php if(!empty($item_details)) : ?>
+    <h2>Search Results</h2>
+    <ul class="grid-container">
+        <?php foreach($item_details as $item) : ?>
+            <li class="grid-item">
+                <h3>
+                <?= $item['item_name'] ?>
+                </h3>
+                <small>Technique:
+                <?= $item['pottery_type'] ?>
+                </small>
+                <small>$
+                <?= $item['item_cost'] ?>
+                </small>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    <?php else: ?>
+        <!--default display-->
         <ul class="grid-container">
         <?php while($row = $statement->fetch()): ?>
             <li class="grid-item">
@@ -72,6 +134,7 @@ $statement->execute();
             </li>
             <?php endwhile; ?>
         </ul>
+        <?php endif; ?>
         <?php endif; ?>
 </main>
 
