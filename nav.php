@@ -12,7 +12,6 @@
     <a href="items.php">Marketplace</a>
     <a href="class.php">Book a Class </a>
     <a href="blog.php">Community</a>
-    <a href="signIn.php">Sign In/Out</a>
 </nav>
 
 
