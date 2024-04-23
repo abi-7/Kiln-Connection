@@ -12,7 +12,7 @@ require('connect.php');
 
 // SQL is written as a String.
 //chronological order 5 most recent posts
-$query = "SELECT * FROM blog ORDER BY date_posted DESC LIMIT 10";
+$query = "SELECT * FROM blog ORDER BY date_posted";
 
 // A PDO::Statement is prepared from the query.
 $statement = $db->prepare($query);
@@ -45,7 +45,7 @@ $statement->execute();
     <div>
         <p>No blog entries yet!</p>
     </div>
-<?php exit; endif; ?>
+<?php endif; ?>
 
 <?php while($row = $statement->fetch()): ?>
         <div class="all-blogs">
@@ -66,7 +66,7 @@ $statement->execute();
         </div>
         <?php else : ?>
             <?=$row['content']?>
-        <?php exit; endif; ?>
+        <?php endif; ?>
 <?php endwhile; ?>
 
 </main>
